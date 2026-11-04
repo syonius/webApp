@@ -505,7 +505,7 @@ function initTx(el,p){
       return (!from||t.date>=from)&&(!to||t.date<=to)&&(mn===null||a>=mn)&&(mx===null||a<=mx)});
     if(q)f=f.filter(t=>(t.type+" "+t.desc+" "+dstr(t.date)+" "+fmt(t.amt)+" "+(t.code||"")).toLowerCase().includes(q));
     if(!f.length){list.innerHTML=`<div class="empty">Nenašli sa žiadne transakcie</div>`;return}
-    list.innerHTML=f.slice(0,shown).map(t=>{const click=t.code||t.detail;
+    list.innerHTML=f.slice(0,shown).map(t=>{const click=true;   // detail je zapnutý pre všetky transakcie
      return `<div class="trow${click?" clk":""}"${click?` data-act="detail" data-src="${key}" data-i="${data.indexOf(t)}"`:""}>
      <div class="l">${t.pending?`<div class="pend">${ic("clock",24,1.6)}Čakajúca</div>`:""}
       <div class="k">${t.type}</div><div class="dsc">${esc(t.desc)}</div></div>
@@ -554,6 +554,8 @@ V.detail=p=>{
   const t=(p.src==="acc"?accTx:cardTx)[p.i];
   const eur=fmt(Math.abs(t.amt)).replace(NB+"EUR","");
   const book=addBd(t.date,2);
+  const [mena,kurz]=p.src==="acc"?["EUR",1]:/tenso Hong Kong/.test(t.desc)?["HKD",8.45]:/TIRO CO/.test(t.desc)?["JPY",168]:/YOYAKUNOW SINGAPORE/.test(t.desc)?["SGD",1.49]:/comicscentrum|najada|GOPAY/.test(t.desc)?["CZK",24.35]:["EUR",1];
+  const orig=mena==="EUR"?eur:fmt(Math.abs(t.amt)*kurz*(1+((p.i*37)%11-5)/1000)).replace(NB+"EUR","");
   const row=(l,v)=>`<div class="drow"><div class="dl">${l}</div><div class="dv">${v}</div></div>`;
   return `<div class="sat"></div><div class="thead dh" style="top:var(--sat)"><div class="ttl" style="margin-bottom:0"><button class="ibtn" data-act="back" style="margin-left:-6px">${ic("back",34,1.3)}</button><h1>Detail transakcie</h1></div></div>
   <div class="dbody">
@@ -569,11 +571,11 @@ V.detail=p=>{
      ${row("Dátum a čas autorizácie",dstr(t.date)+" 00:00:00")}
      ${row("Dátum zaúčtovania",dstr(book))}
      ${row("Popis transakcie",esc(t.desc))}
-     ${row("Číslo karty","*8632")}
+     ${p.src==="acc"?"":row("Číslo karty","*8632")}
      ${row("Suma v mene karty/účtu",eur)}
      ${row("Mena","EUR")}
-     ${row("Suma v pôvodnej mene",eur)}
-     ${row("Pôvodná mena","EUR")}
+     ${row("Suma v pôvodnej mene",orig)}
+     ${row("Pôvodná mena",mena)}
      ${row("Typ transakcie",t.type)}
      ${row("Stav transakcie",t.pending?"Čakajúca":"Zrealizované")}
      ${row("Výsledok autorizácie","Schválená")}

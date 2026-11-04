@@ -72,8 +72,8 @@ svg{display:block;flex:none}
 .tx-home .d{color:var(--gray);font-size:15px;margin-top:6px}
 .pos{color:var(--pos);font-weight:700}
 .neg{font-weight:700;color:#1c1c1c}
-.tabbar{position:absolute;left:0;right:0;bottom:0;height:calc(116px - var(--gap,0px));background:#fff;border:1.5px solid var(--line);border-bottom:0;border-radius:30px 30px 0 0;display:grid;grid-template-columns:repeat(3,1fr);padding-top:8px;z-index:6;box-shadow:0 -4px 20px #0000000a}
-.tab{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:13px;line-height:1.25;color:#333;align-self:start}
+.tabbar{position:absolute;left:0;right:0;bottom:0;height:calc(109px - var(--gap,0px));background:#fff;border:1.5px solid var(--line);border-bottom:0;border-radius:30px 30px 0 0;display:grid;grid-template-columns:repeat(3,1fr);padding-top:8px;z-index:6;box-shadow:0 -4px 20px #0000000a}
+.tab{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:12px;line-height:1.2;color:#333;align-self:start}
 
 /* ---------- MENU ---------- */
 .menu{padding:calc(var(--sat) + 18px) 20px 60px;background:#fff}
@@ -349,9 +349,9 @@ function render(anim){
 
 /* ================= obrazovky ================= */
 const tabbar=()=>`<div class="tabbar">
- <button class="tab" data-go="stub" data-t="Platby">${ic("dollar",26,1.5)}Platby</button>
- <button class="tab" data-go="cards">${ic("card",26,1.5)}Karty</button>
- <button class="tab" data-go="stub" data-t="Ponuky">${ic("star",26,1.5)}Ponuky</button></div>`;
+ <button class="tab" data-go="stub" data-t="Platby">${ic("dollar",24,1.5)}Platby</button>
+ <button class="tab" data-go="cards">${ic("card",24,1.5)}Karty</button>
+ <button class="tab" data-go="stub" data-t="Ponuky">${ic("star",24,1.5)}Ponuky</button></div>`;
 
 const V={};
 V.home=()=>{

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-title" content="VÚB Banking">
 <meta name="theme-color" content="#24493a">
 <meta name="format-detection" content="telephone=no">
@@ -20,13 +20,12 @@
   --sat:env(safe-area-inset-top,0px); --sab:env(safe-area-inset-bottom,0px);
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html{background:#fff}
+html{background:var(--green)}
 html,body{margin:0;height:100%;color:var(--ink);
   font-family:"Poppins","Avenir Next","Helvetica Neue",system-ui,-apple-system,sans-serif;
   -webkit-text-size-adjust:100%;overscroll-behavior:none}
 button{touch-action:manipulation;font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
 #app{position:fixed;inset:0;overflow:hidden;background:#fff}
-#statusfill{position:fixed;top:0;left:0;right:0;height:var(--sat);background:var(--green);z-index:50;pointer-events:none}
 @media(min-width:600px){
   body{background:#0e1512;display:flex;align-items:center;justify-content:center}
   #app{position:relative;inset:auto;height:min(100dvh - 24px,900px);width:430px;border-radius:44px;box-shadow:0 20px 80px #000a}
@@ -167,7 +166,6 @@ svg{display:block;flex:none}
 </head>
 <body>
 <div id="app"><div class="toast" id="toast"></div></div>
-<div id="statusfill"></div>
 <script>
 "use strict";
 /* ================= ikony ================= */
@@ -492,7 +490,9 @@ app.addEventListener("click",e=>{
 ["gesturestart","gesturechange"].forEach(t=>document.addEventListener(t,e=>e.preventDefault()));
 function fit(){
   const st=navigator.standalone===true||matchMedia("(display-mode: standalone)").matches;
-  const gap=st&&innerWidth<600&&innerHeight>innerWidth?Math.max(0,screen.height-innerHeight):0;
+  const pr=document.createElement('div');pr.style.cssText='position:fixed;visibility:hidden;padding-top:env(safe-area-inset-top,0px)';document.body.appendChild(pr);
+  const sat=parseFloat(getComputedStyle(pr).paddingTop)||0;pr.remove();
+  const gap=st&&sat>0&&innerWidth<600&&innerHeight>innerWidth?Math.max(0,screen.height-innerHeight):0;
   document.documentElement.style.setProperty("--gap",gap+"px");
 }
 fit();addEventListener("resize",fit);addEventListener("orientationchange",fit);

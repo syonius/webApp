@@ -64,10 +64,11 @@ svg{display:block;flex:none}
 .sect{display:flex;align-items:center;justify-content:space-between;margin:34px 0 22px}
 .sect h2{margin:0 0 0 14px;font-size:26px;font-weight:700;flex:1}
 .link{color:var(--green-t);text-decoration:underline;font-size:16.5px;font-weight:500}
-.tx-home{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.tx-home{display:flex;justify-content:space-between;gap:12px;padding:18px 0;border-bottom:1px solid var(--line)}
 .tx-home .t{font-size:17px;line-height:1.5}
 .tx-home .d{color:var(--gray);font-size:15px;margin-top:6px}
 .pos{color:var(--pos);font-weight:700}
+.neg{font-weight:700;color:#1c1c1c}
 .tabbar{position:absolute;left:0;right:0;bottom:0;height:calc(96px + var(--sab));background:#fff;border:1.5px solid var(--line);border-bottom:0;border-radius:34px 34px 0 0;display:grid;grid-template-columns:repeat(3,1fr);padding-top:14px;z-index:6;box-shadow:0 -4px 20px #0000000a}
 .tab{display:flex;flex-direction:column;align-items:center;gap:8px;font-size:15px;color:#333}
 
@@ -288,7 +289,7 @@ const cardTx=[
 /* ================= dáta: transakcie účtu ================= */
 const accTx=(function(){
   const out=[],r=rng(2610),rr=(a,b)=>Math.round((a+r()*(b-a))*100)/100;
-  const IN="Prichádzajúca platba",OUT="Odchádzajúca platba",ME="ING. JOZEF NOVAK";
+  const IN="Prichádzajúca platba",OUT="Odchádzajúca platba",ME="Výplata";
   for(let m=5;m<=11;m++){
     out.push(T(D(2026,m,3),IN,ME,1300));
     if(m>=6&&m<=10)out.push(T(D(2026,m,21),OUT,"Splátka kreditnej karty *8632",-[57,76,100,150][Math.floor(r()*4)]));
@@ -299,6 +300,14 @@ const accTx=(function(){
   }
   return out.sort((a,b)=>b.date-a.date);
 })();
+
+const homeTx=[
+ T(D(2026,10,30),"Poplatky a iné","Vedenie konta VÚB účet Extra",-11),
+ T(D(2026,10,30),"Odchádzajúca platba","Investicne sporenie - STO",-20),
+ T(D(2026,10,30),"Vklad cez bankomat","Vklad hotovosti; S6AV162X Nitra 18:05",100),
+];
+accTx.push(...homeTx,T(D(2026,10,28),"Odchádzajúca platba","Sporenie",-50));
+accTx.sort((a,b)=>b.date-a.date);
 
 /* ================= karty ================= */
 const CARDS=[
@@ -343,7 +352,6 @@ const tabbar=()=>`<div class="tabbar">
 
 const V={};
 V.home=()=>{
-  const last=accTx[0];
   const bal=state.hidden?"•••• EUR":`1${NB}396,<small>12 EUR</small>`;
   const mnth=["jan","feb","mar","apr","máj","jún","júl","aug","sep","okt","nov","dec"];
   return `<div class="hero">
@@ -360,8 +368,8 @@ V.home=()=>{
   <div class="promo"><div><h3>Slováci si odkladajú mesačne v priemere 120 €. Pridáte sa aj Vy?</h3><p>Navýšte si sporenie a priblížte sa k svojim snom rýchlejšie. Zaberie to len pár klikov!</p><button class="btn" data-act="demo">Chcem sporiť viac</button></div>
    <svg width="130" height="150" viewBox="0 0 130 150" style="flex:none;align-self:center"><ellipse cx="62" cy="70" rx="62" ry="64" fill="#dff1e7"/><path d="M20 62a42 42 0 0184 0z" fill="#3c8a5b"/><path d="M62 20v95" stroke="#222" stroke-width="2"/><circle cx="52" cy="92" r="9" fill="#d96b32"/><rect x="38" y="100" width="26" height="42" rx="6" fill="#fff" stroke="#222" stroke-width="2"/><circle cx="108" cy="58" r="11" fill="#2f7a50"/><circle cx="110" cy="86" r="9" fill="#d96b32"/></svg></div>
   <div class="sect"><span>${ic("transfer",30,1.5)}</span><h2>Transakcie</h2><button class="link" data-go="tx" data-src="acc">Zobraziť všetko</button></div>
-  <div class="tx-home"><div><div class="t">${last.type}<br>${last.desc}</div><div class="d">${last.date.getDate()} ${mnth[last.date.getMonth()]} ${last.date.getFullYear()}</div></div>
-   <div class="pos" style="font-size:18px;padding-top:34px;white-space:nowrap">${state.hidden?"•••• EUR":fmt(last.amt,1)}</div></div>
+  ${homeTx.map(t=>`<div class="tx-home"><div><div class="t">${t.type}<br>${t.desc}</div><div class="d">${t.date.getDate()} ${mnth[t.date.getMonth()]} ${t.date.getFullYear()}</div></div>
+   <div class="${t.amt>0?"pos":"neg"}" style="font-size:18px;white-space:nowrap;align-self:center">${state.hidden?"•••• EUR":fmt(t.amt,1)}</div></div>`).join("")}
  </div>`;
 };
 

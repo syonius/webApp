@@ -20,14 +20,14 @@
   --sat:env(safe-area-inset-top,0px); --sab:env(safe-area-inset-bottom,0px);
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;height:100%;background:#fff;color:var(--ink);
+html,body{margin:0;height:100%;background:var(--green);color:var(--ink);
   font-family:"Poppins","Avenir Next","Helvetica Neue",system-ui,-apple-system,sans-serif;
   -webkit-text-size-adjust:100%;overscroll-behavior:none}
 button{touch-action:manipulation;font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
-#app{position:relative;width:100%;height:100dvh;overflow:hidden;background:#fff;margin:0 auto;max-width:480px}
+#app{position:fixed;inset:0;overflow:hidden;background:#fff}
 @media(min-width:600px){
   body{background:#0e1512;display:flex;align-items:center;justify-content:center}
-  #app{height:min(100dvh - 24px,900px);width:430px;border-radius:44px;box-shadow:0 20px 80px #000a}
+  #app{position:relative;inset:auto;height:min(100dvh - 24px,900px);width:430px;border-radius:44px;box-shadow:0 20px 80px #000a}
 }
 .screen{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;background:#fff;-webkit-overflow-scrolling:touch}
 .screen.enter{animation:in .22s ease-out}
@@ -38,65 +38,67 @@ svg{display:block;flex:none}
 .sat{height:var(--sat);background:var(--green);position:sticky;top:0;z-index:5}
 
 /* ---------- HOME ---------- */
-.hero{position:relative;background:var(--green);color:#fff;padding:calc(var(--sat) + 18px) 20px 36px;overflow:hidden}
-.hero:before{content:"";position:absolute;right:-30%;top:-10%;width:90%;height:75%;background:#ffffff0a;border-radius:50%}
-.hero:after{content:"";position:absolute;right:-25%;bottom:-18%;width:70%;height:50%;background:#ffffff08;border-radius:50%}
-.hero>*{position:relative;z-index:1}
+.hero{position:relative;color:#fff;padding:8px 20px 36px}
+.screen.home{overflow:hidden;display:flex;flex-direction:column;background:var(--green)}
+.home .deco{position:absolute;right:-30%;top:-10%;width:90%;height:430px;background:#ffffff0a;border-radius:50%;pointer-events:none}
+.home .deco2{position:absolute;right:-25%;top:340px;width:70%;height:330px;background:#ffffff08;border-radius:50%;pointer-events:none}
+.topbar{position:relative;z-index:2;flex:none;color:#fff;padding:calc(var(--sat) + 8px) 20px 2px}
+.home .scroll{position:relative;z-index:1;flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
 .row{display:flex;align-items:center}
 .sp{justify-content:space-between}
-.ibtn{width:44px;height:44px;display:grid;place-items:center;position:relative}
-.badge{position:absolute;top:4px;right:2px;width:15px;height:15px;border-radius:50%;background:#6fe3a8;color:#0d3a28;font-size:10px;display:grid;place-items:center;font-weight:600}
-.pill{background:var(--green-d);border-radius:30px;padding:0 18px;height:46px;gap:12px;font-size:16px;font-weight:500;display:flex;align-items:center}
-.circ{width:46px;height:46px;border-radius:50%;background:var(--green-d);display:grid;place-items:center}
-.bal{font-size:44px;font-weight:700;letter-spacing:-.5px;line-height:1.1}
-.bal small{font-size:26px;font-weight:600}
-.bal-l{font-size:15px;opacity:.9;margin-top:6px}
-.boxes{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:26px 0}
-.box{border:1.5px solid #ffffff55;border-radius:26px;padding:16px;font-size:14.5px}
-.box b{display:block;margin-top:2px;font-size:15px}
-.mi{width:34px;height:34px;border-radius:9px;background:var(--mint-i);color:var(--green);display:grid;place-items:center;margin-bottom:12px}
-.iban{font-size:17px;font-weight:500;letter-spacing:.2px}
-.sheet{position:relative;margin-top:-18px;background:#fff;border-radius:34px 34px 0 0;padding:22px 20px calc(120px + var(--sab))}
+.ibtn{width:40px;height:40px;display:grid;place-items:center;position:relative}
+.badge{position:absolute;top:4px;right:2px;width:15px;height:15px;border-radius:50%;background:#6fe3a8;color:#0d3a28;font-size:8.5px;display:grid;place-items:center;font-weight:600}
+.pill{background:var(--green-d);border-radius:30px;padding:0 16px;height:36px;gap:10px;font-size:14px;font-weight:500;display:flex;align-items:center}
+.circ{width:36px;height:36px;border-radius:50%;background:var(--green-d);display:grid;place-items:center}
+.bal{font-size:29px;font-weight:700;letter-spacing:-.5px;line-height:1.1}
+.bal small{font-size:17px;font-weight:600}
+.bal-l{font-size:13px;opacity:.9;margin-top:6px}
+.boxes{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:22px 0}
+.box{border:1.5px solid #ffffff55;border-radius:22px;padding:14px;font-size:12.5px}
+.box b{display:block;margin-top:2px;font-size:13px}
+.mi{width:26px;height:26px;border-radius:7px;background:var(--mint-i);color:var(--green);display:grid;place-items:center;margin-bottom:10px}
+.iban{font-size:14px;font-weight:500;letter-spacing:.2px}
+.sheet{position:relative;margin-top:-18px;background:#fff;border-radius:30px 30px 0 0;padding:20px 20px calc(110px + var(--sab));min-height:60vh}
 .promo{border-radius:26px;background:linear-gradient(100deg,#f8eee8,#e3f3ea);padding:18px 16px 18px 18px;display:flex;gap:6px}
-.promo h3{margin:0 0 10px;font-size:16.5px;line-height:1.3;font-weight:700}
-.promo p{margin:0 0 12px;font-size:15.5px;line-height:1.3}
-.btn{background:var(--green-d);color:#fff;border-radius:30px;padding:0 22px;height:42px;font-size:14px;font-weight:600;text-transform:uppercase;display:inline-flex;align-items:center}
+.promo h3{margin:0 0 10px;font-size:14.5px;line-height:1.3;font-weight:700}
+.promo p{margin:0 0 12px;font-size:13.5px;line-height:1.3}
+.btn{background:var(--green-d);color:#fff;border-radius:30px;padding:0 22px;height:42px;font-size:12px;font-weight:600;text-transform:uppercase;display:inline-flex;align-items:center}
 .sect{display:flex;align-items:center;justify-content:space-between;margin:34px 0 22px}
-.sect h2{margin:0 0 0 14px;font-size:26px;font-weight:700;flex:1}
-.link{color:var(--green-t);text-decoration:underline;font-size:16.5px;font-weight:500}
+.sect h2{margin:0 0 0 14px;font-size:22.5px;font-weight:700;flex:1}
+.link{color:var(--green-t);text-decoration:underline;font-size:14.5px;font-weight:500}
 .tx-home{display:flex;justify-content:space-between;gap:12px;padding:18px 0;border-bottom:1px solid var(--line)}
-.tx-home .t{font-size:17px;line-height:1.5}
-.tx-home .d{color:var(--gray);font-size:15px;margin-top:6px}
+.tx-home .t{font-size:15px;line-height:1.5}
+.tx-home .d{color:var(--gray);font-size:13px;margin-top:6px}
 .pos{color:var(--pos);font-weight:700}
 .neg{font-weight:700;color:#1c1c1c}
-.tabbar{position:absolute;left:0;right:0;bottom:0;height:calc(96px + var(--sab));background:#fff;border:1.5px solid var(--line);border-bottom:0;border-radius:34px 34px 0 0;display:grid;grid-template-columns:repeat(3,1fr);padding-top:14px;z-index:6;box-shadow:0 -4px 20px #0000000a}
-.tab{display:flex;flex-direction:column;align-items:center;gap:8px;font-size:15px;color:#333}
+.tabbar{position:absolute;left:0;right:0;bottom:0;height:calc(84px + var(--sab));background:#fff;border:1.5px solid var(--line);border-bottom:0;border-radius:30px 30px 0 0;display:grid;grid-template-columns:repeat(3,1fr);padding-top:12px;z-index:6;box-shadow:0 -4px 20px #0000000a}
+.tab{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:13px;color:#333}
 
 /* ---------- MENU ---------- */
 .menu{padding:calc(var(--sat) + 18px) 20px 60px;background:#fff}
 .menu .top{display:flex;align-items:center;gap:22px;margin-bottom:34px}
 .menu .top .x{margin-left:auto}
 .mitem{background:#fff;border-radius:22px;box-shadow:0 4px 18px #00000012;margin-bottom:20px;overflow:hidden}
-.mhead{display:flex;align-items:center;gap:18px;height:72px;padding:0 20px;font-size:20px;width:100%;text-align:left}
+.mhead{display:flex;align-items:center;gap:18px;height:72px;padding:0 20px;font-size:17.5px;width:100%;text-align:left}
 .mhead span{flex:1}
 .mhead.offer{background:linear-gradient(90deg,#d9f1e7,#f9eee9);color:var(--green-t);border-radius:22px;margin-bottom:34px}
 .sub{display:none;padding:0 24px 26px 66px}
 .mitem.open .sub{display:block}
-.sub a{display:block;font-size:17px;text-decoration:underline;padding:10px 0;margin-bottom:6px;cursor:pointer}
-.out{display:inline-flex;align-items:center;gap:12px;font-size:18px;font-weight:600;color:var(--green-t);margin-top:8px}
+.sub a{display:block;font-size:15px;text-decoration:underline;padding:10px 0;margin-bottom:6px;cursor:pointer}
+.out{display:inline-flex;align-items:center;gap:12px;font-size:15.5px;font-weight:600;color:var(--green-t);margin-top:8px}
 .out u{text-underline-offset:3px}
 
 /* ---------- KARTY ---------- */
 .chead{position:relative;background:var(--green);color:#fff;padding:calc(var(--sat) + 18px) 20px 0;border-radius:0 0 0 90px;height:calc(var(--sat) + 330px)}
-.chead h1{margin:34px 0 16px;font-size:30px;font-weight:700}
-.chip{display:inline-block;background:#e8f3ec;color:#222;border-radius:7px;padding:8px 12px;font-size:15px;text-transform:uppercase}
-.cname{font-size:25px;font-weight:700;margin-top:6px;display:flex;align-items:center;gap:10px}
+.chead h1{margin:34px 0 16px;font-size:26px;font-weight:700}
+.chip{display:inline-block;background:#e8f3ec;color:#222;border-radius:7px;padding:8px 12px;font-size:13px;text-transform:uppercase}
+.cname{font-size:22px;font-weight:700;margin-top:6px;display:flex;align-items:center;gap:10px}
 .car{margin-top:-4px;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:5%;padding:0 15%;scrollbar-width:none;position:relative;z-index:2}
 .car::-webkit-scrollbar{display:none}
 .card{flex:0 0 70%;aspect-ratio:1.586;border-radius:22px;scroll-snap-align:center;position:relative;color:#4a3d12;box-shadow:0 8px 20px #0003;overflow:hidden}
-.card .bn{position:absolute;left:14px;top:16px;font-family:Georgia,serif;font-size:20px;letter-spacing:.5px}
-.card .bn small{display:block;font-size:11px;margin-top:-2px;font-style:italic;font-family:inherit}
-.card .ty{position:absolute;right:30px;bottom:72px;font-size:20px;font-weight:600}
+.card .bn{position:absolute;left:14px;top:16px;font-family:Georgia,serif;font-size:17.5px;letter-spacing:.5px}
+.card .bn small{display:block;font-size:9.5px;margin-top:-2px;font-style:italic;font-family:inherit}
+.card .ty{position:absolute;right:30px;bottom:72px;font-size:17.5px;font-weight:600}
 .card .mc{position:absolute;right:16px;bottom:16px;display:flex}
 .card .mc i{width:46px;height:46px;border-radius:50%;display:block}
 .card .mc i:first-child{background:#e12a2a}
@@ -109,55 +111,55 @@ svg{display:block;flex:none}
 .dots{display:flex;justify-content:center;gap:7px;margin:14px 0 26px}
 .dots i{width:8px;height:8px;border-radius:5px;background:#555;opacity:.8;transition:.2s}
 .dots i.on{width:26px;background:var(--green-d);opacity:1}
-.acts{display:grid;grid-template-columns:repeat(3,1fr);text-align:center;padding:0 20px;font-size:16px}
+.acts{display:grid;grid-template-columns:repeat(3,1fr);text-align:center;padding:0 20px;font-size:14px}
 .acts .mi{width:60px;height:60px;border-radius:50%;margin:0 auto 12px;background:var(--mint-i)}
 .pay{margin:36px 12px 0;background:var(--mint);border-radius:22px;padding:18px 20px}
-.pay em{display:block;font-size:15.5px;color:#444;line-height:1.35}
+.pay em{display:block;font-size:13.5px;color:#444;line-height:1.35}
 .pay .r{display:flex;justify-content:space-between;align-items:center;padding:20px 0 16px;border-bottom:1px solid #c9e2d4}
 .pay .r2{padding-top:14px}
-.pay .big{font-size:22px;font-weight:700;color:#333;margin-top:4px}
-.pay .lbl{font-size:19px;color:#444}
-.btn2{background:var(--green-d);color:#fff;border-radius:30px;height:50px;padding:0 20px;font-size:16px;font-weight:600;display:inline-flex;align-items:center}
+.pay .big{font-size:19px;font-weight:700;color:#333;margin-top:4px}
+.pay .lbl{font-size:16.5px;color:#444}
+.btn2{background:var(--green-d);color:#fff;border-radius:30px;height:50px;padding:0 20px;font-size:14px;font-weight:600;display:inline-flex;align-items:center}
 .lim{margin:48px 12px calc(40px + var(--sab));background:#fff;border-radius:22px;box-shadow:0 2px 18px #0000001a;padding:24px 22px}
-.lim .lbl{font-size:17.5px;color:#444}
-.lim .big{font-size:26px;font-weight:700;margin:6px 0 16px}
+.lim .lbl{font-size:15px;color:#444}
+.lim .big{font-size:22.5px;font-weight:700;margin:6px 0 16px}
 .bar{height:34px;border:2px solid #777;border-radius:20px;background:#f3f3f3;overflow:hidden}
 .bar i{display:block;height:100%;background:var(--orange);border-radius:20px 0 0 20px}
-.lg{display:flex;justify-content:space-between;margin-top:14px;font-size:16px;color:#444}
+.lg{display:flex;justify-content:space-between;margin-top:14px;font-size:14px;color:#444}
 .lg .dot:before{content:"";display:inline-block;width:14px;height:14px;border-radius:50%;background:var(--orange);margin-right:10px;vertical-align:-1px}
 
 /* ---------- TRANSAKCIE ---------- */
 .thead{position:sticky;top:0;z-index:4;background:#fff;padding:18px 16px 12px}
 .thead .ttl{display:flex;align-items:center;height:48px;margin-bottom:22px}
-.thead .ttl h1{flex:1;text-align:center;margin:0 44px 0 0;font-size:23px;font-weight:500}
+.thead .ttl h1{flex:1;text-align:center;margin:0 44px 0 0;font-size:20px;font-weight:500}
 .srch{display:flex;align-items:center;gap:12px}
 .srch label{flex:1;display:flex;align-items:center;gap:12px;border:1.5px solid #333;border-radius:30px;height:58px;padding:0 20px}
-.srch input{border:0;outline:0;font:inherit;font-size:17px;width:100%;background:none;color:var(--ink)}
+.srch input{border:0;outline:0;font:inherit;font-size:15px;width:100%;background:none;color:var(--ink)}
 .srch input::placeholder{color:#222;font-weight:500}
 .trow{display:flex;justify-content:space-between;gap:12px;padding:26px 22px 24px 28px;border-bottom:1px solid var(--line)}
 .trow .l{flex:1;min-width:0}
-.pend{display:inline-flex;align-items:center;gap:8px;background:#f0f0f0;border-radius:9px;padding:9px 14px;font-size:16px;margin-bottom:12px}
-.trow .k{font-size:19px;color:#4a4a4a}
-.trow .dsc{font-size:19px;color:#4a4a4a;line-height:1.28;margin-top:4px;word-break:break-word}
+.pend{display:inline-flex;align-items:center;gap:8px;background:#f0f0f0;border-radius:9px;padding:9px 14px;font-size:14px;margin-bottom:12px}
+.trow .k{font-size:16.5px;color:#4a4a4a}
+.trow .dsc{font-size:16.5px;color:#4a4a4a;line-height:1.28;margin-top:4px;word-break:break-word}
 .trow .rt{text-align:right;white-space:nowrap}
-.trow .dt{font-size:17px;color:#555}
-.trow .am{font-size:21px;font-weight:700;margin-top:10px;color:#1c1c1c}
+.trow .dt{font-size:15px;color:#555}
+.trow .am{font-size:18.5px;font-weight:700;margin-top:10px;color:#1c1c1c}
 .trow.has .rt{padding-top:3px}
-.more{display:block;width:100%;text-align:left;padding:26px 16px calc(60px + var(--sab));font-size:19px;font-weight:500;color:var(--green-t);text-transform:uppercase}
-.empty{padding:60px 30px;text-align:center;color:#777;font-size:17px}
+.more{display:block;width:100%;text-align:left;padding:26px 16px calc(60px + var(--sab));font-size:16.5px;font-weight:500;color:var(--green-t);text-transform:uppercase}
+.empty{padding:60px 30px;text-align:center;color:#777;font-size:15px}
 
 /* ---------- OSTATNE ---------- */
-.stub{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 36px;color:#555;font-size:17px;line-height:1.5;min-height:70%}
-.toast{position:absolute;left:50%;bottom:calc(30px + var(--sab));transform:translate(-50%,20px);background:#222;color:#fff;padding:13px 20px;border-radius:30px;font-size:15px;opacity:0;pointer-events:none;transition:.25s;z-index:30;white-space:nowrap}
+.stub{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 36px;color:#555;font-size:15px;line-height:1.5;min-height:70%}
+.toast{position:absolute;left:50%;bottom:calc(30px + var(--sab));transform:translate(-50%,20px);background:#222;color:#fff;padding:13px 20px;border-radius:30px;font-size:13px;opacity:0;pointer-events:none;transition:.25s;z-index:30;white-space:nowrap}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 .ov{position:absolute;inset:0;background:#0006;z-index:20;display:flex;align-items:flex-end;animation:fade .2s}
 @keyframes fade{from{opacity:0}to{opacity:1}}
 .mod{background:#fff;width:100%;border-radius:30px 30px 0 0;padding:26px 24px calc(30px + var(--sab));animation:inb .25s ease-out}
 @keyframes inb{from{transform:translateY(40px)}to{transform:none}}
-.mod h3{margin:0 0 18px;font-size:22px}
-.mod .opt{display:block;width:100%;text-align:left;padding:16px 0;font-size:18px;border-bottom:1px solid var(--line)}
+.mod h3{margin:0 0 18px;font-size:19px}
+.mod .opt{display:block;width:100%;text-align:left;padding:16px 0;font-size:15.5px;border-bottom:1px solid var(--line)}
 .pin{display:flex;gap:14px;justify-content:center;margin:26px 0 20px}
-.pin b{width:56px;height:68px;border-radius:14px;background:var(--mint);display:grid;place-items:center;font-size:30px;color:var(--green)}
+.pin b{width:56px;height:68px;border-radius:14px;background:var(--mint);display:grid;place-items:center;font-size:26px;color:var(--green)}
 .mod .btn2{width:100%;justify-content:center;margin-top:16px}
 </style>
 </head>
@@ -197,7 +199,7 @@ clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
 coins:'<circle cx="10" cy="12" r="6"/><circle cx="14.5" cy="12" r="6"/>',
 pinfield:'<rect x="2" y="7" width="20" height="10" rx="2"/><path d="M6 12h.01M10 12h.01M14 12h.01M18 12h.01" stroke-width="2.4"/>'
 };
-const ic=(n,s=24,w=1.6)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round">${I[n]}</svg>`;
+const ic=(n,s=24,w=1.6)=>(s=Math.round(s*0.68),`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round">${I[n]}</svg>`);
 
 /* ================= pomocné ================= */
 const NB=" ";
@@ -335,7 +337,7 @@ function render(anim){
   const {s,...p}=cur();
   const old=app.querySelector(".screen,.tabbar");app.querySelectorAll(".screen,.tabbar").forEach(e=>e.remove());
   const el=document.createElement("div");
-  el.className="screen"+(anim?" "+anim:"");
+  el.className="screen"+(s==="home"?" home":"")+(anim?" "+anim:"");
   el.innerHTML=(V[s]||V.stub)(p);
   app.insertBefore(el,app.firstChild);
   if(s==="home"){app.insertAdjacentHTML("beforeend",tabbar())}
@@ -346,31 +348,32 @@ function render(anim){
 
 /* ================= obrazovky ================= */
 const tabbar=()=>`<div class="tabbar">
- <button class="tab" data-go="stub" data-t="Platby">${ic("dollar",50,1.4)}Platby</button>
- <button class="tab" data-go="cards">${ic("card",50,1.4)}Karty</button>
- <button class="tab" data-go="stub" data-t="Ponuky">${ic("star",50,1.4)}Ponuky</button></div>`;
+ <button class="tab" data-go="stub" data-t="Platby">${ic("dollar",38,1.4)}Platby</button>
+ <button class="tab" data-go="cards">${ic("card",38,1.4)}Karty</button>
+ <button class="tab" data-go="stub" data-t="Ponuky">${ic("star",38,1.4)}Ponuky</button></div>`;
 
 const V={};
 V.home=()=>{
   const bal=state.hidden?"•••• EUR":`1${NB}396,<small>12 EUR</small>`;
   const mnth=["jan","feb","mar","apr","máj","jún","júl","aug","sep","okt","nov","dec"];
-  return `<div class="hero">
-  <div class="row sp"><button class="ibtn" data-go="menu" style="margin-left:-10px">${ic("menu",34,1.4)}</button>
-   <div class="row"><button class="ibtn" data-act="demo">${ic("bell",34,1.4)}<span class="badge">1</span></button><button class="ibtn" data-act="demo">${ic("user",34,1.4)}</button></div></div>
-  <div class="row sp" style="margin-top:14px"><button class="pill" data-act="demo">VÚB účet Extra ${ic("down",18,2)}</button><button class="circ" data-act="demo" style="width:46px">${ic("dots",24)}</button></div>
-  <div class="row" style="margin-top:34px;gap:18px"><div class="bal">${bal}</div><button class="circ" data-act="eye" style="width:56px;height:56px">${ic(state.hidden?"eyeoff":"eye",30,1.5)}</button></div>
+  return `<div class="deco"></div><div class="deco2"></div>
+ <div class="topbar"><div class="row sp"><button class="ibtn" data-go="menu" style="margin-left:-10px">${ic("menu",34,1.4)}</button>
+   <div class="row"><button class="ibtn" data-act="demo">${ic("bell",34,1.4)}<span class="badge">1</span></button><button class="ibtn" data-act="demo">${ic("user",34,1.4)}</button></div></div></div>
+ <div class="scroll"><div class="hero">
+  <div class="row sp" style="margin-top:14px"><button class="pill" data-act="demo">VÚB účet Extra ${ic("down",18,2)}</button><button class="circ" data-act="demo" style="width:36px">${ic("dots",24)}</button></div>
+  <div class="row" style="margin-top:22px;gap:14px"><div class="bal">${bal}</div><button class="circ" data-act="eye" style="width:36px;height:36px">${ic(state.hidden?"eyeoff":"eye",30,1.5)}</button></div>
   <div class="bal-l">Použiteľný zostatok</div>
   <div class="boxes">
-   <div class="box"><div class="mi">${ic("coins",22)}</div>Vlastné prostriedky<b>${state.hidden?"•••• EUR":"1"+NB+"396,12"+NB+"EUR"}</b></div>
-   <div class="box"><div class="mi">${ic("coins",22)}</div>Povolené prečerpanie:<b>${state.hidden?"•••• EUR":"0,00"+NB+"EUR"}</b></div></div>
+   <div class="box"><div class="mi">${ic("coins",24)}</div>Vlastné prostriedky<b>${state.hidden?"•••• EUR":"1"+NB+"396,12"+NB+"EUR"}</b></div>
+   <div class="box"><div class="mi">${ic("coins",24)}</div>Povolené prečerpanie:<b>${state.hidden?"•••• EUR":"0,00"+NB+"EUR"}</b></div></div>
   <div class="row sp"><div class="iban">SK50 0200 0000 0005 5410 1168</div><button class="circ" data-act="copy">${ic("share",24,1.5)}</button></div></div>
  <div class="sheet">
   <div class="promo"><div><h3>Slováci si odkladajú mesačne v priemere 120 €. Pridáte sa aj Vy?</h3><p>Navýšte si sporenie a priblížte sa k svojim snom rýchlejšie. Zaberie to len pár klikov!</p><button class="btn" data-act="demo">Chcem sporiť viac</button></div>
    <svg width="130" height="150" viewBox="0 0 130 150" style="flex:none;align-self:center"><ellipse cx="62" cy="70" rx="62" ry="64" fill="#dff1e7"/><path d="M20 62a42 42 0 0184 0z" fill="#3c8a5b"/><path d="M62 20v95" stroke="#222" stroke-width="2"/><circle cx="52" cy="92" r="9" fill="#d96b32"/><rect x="38" y="100" width="26" height="42" rx="6" fill="#fff" stroke="#222" stroke-width="2"/><circle cx="108" cy="58" r="11" fill="#2f7a50"/><circle cx="110" cy="86" r="9" fill="#d96b32"/></svg></div>
   <div class="sect"><span>${ic("transfer",30,1.5)}</span><h2>Transakcie</h2><button class="link" data-go="tx" data-src="acc">Zobraziť všetko</button></div>
   ${homeTx.map(t=>`<div class="tx-home"><div><div class="t">${t.type}<br>${t.desc}</div><div class="d">${t.date.getDate()} ${mnth[t.date.getMonth()]} ${t.date.getFullYear()}</div></div>
-   <div class="${t.amt>0?"pos":"neg"}" style="font-size:18px;white-space:nowrap;align-self:center">${state.hidden?"•••• EUR":fmt(t.amt,1)}</div></div>`).join("")}
- </div>`;
+   <div class="${t.amt>0?"pos":"neg"}" style="font-size:15.5px;white-space:nowrap;align-self:center">${state.hidden?"•••• EUR":fmt(t.amt,1)}</div></div>`).join("")}
+ </div></div>`;
 };
 
 V.menu=()=>{
@@ -408,7 +411,7 @@ function cardInfo(i){
   <div class="r2"><div class="lbl">Minimálna splátka</div><div class="big">${fmt(57)}</div></div></div>
   <div class="lim"><div class="lbl">Dostupný limit</div><div class="big">${fmt(1402.27)}</div>
   <div class="bar"><i style="width:35%"></i></div>
-  <div class="lg"><span class="dot">Dostupný limit</span><span style="text-align:right">Úverový limit:<br><b style="font-size:17px;color:#222">${fmt(4000)}</b></span></div></div>`;
+  <div class="lg"><span class="dot">Dostupný limit</span><span style="text-align:right">Úverový limit:<br><b style="font-size:15px;color:#222">${fmt(4000)}</b></span></div></div>`;
 }
 function initCards(el){
   const car=el.querySelector("#car"),dots=[...el.querySelectorAll("#dots i")];
@@ -477,7 +480,7 @@ app.addEventListener("click",e=>{
       a.lastElementChild.outerHTML=ic(state.menuOpen[t]?"up":"down",24,1.6);break}
     case"logout":toast("Demo: odhlásenie nie je aktívne");break;
     case"more-tx":a.closest("#list")._more();break;
-    case"pin":modal(`<h3>PIN karty ${CARDS[state.cardIdx].name.slice(0,5)}</h3><div class="pin"><b>4</b><b>8</b><b>2</b><b>1</b></div><div style="color:#666;font-size:14px;text-align:center">Demo PIN. Zobrazuje sa len ukážkovo.</div><button class="btn2" data-act="mclose">Zavrieť</button>`);break;
+    case"pin":modal(`<h3>PIN karty ${CARDS[state.cardIdx].name.slice(0,5)}</h3><div class="pin"><b>4</b><b>8</b><b>2</b><b>1</b></div><div style="color:#666;font-size:12px;text-align:center">Demo PIN. Zobrazuje sa len ukážkovo.</div><button class="btn2" data-act="mclose">Zavrieť</button>`);break;
     case"more":modal(`<h3>Ďalšie akcie</h3><button class="opt" data-act="demo">Zmeniť limity</button><button class="opt" data-act="demo">Zablokovať kartu</button><button class="opt" data-act="demo">Nastavenia platieb</button><button class="btn2" data-act="mclose">Zavrieť</button>`);break;
     case"mclose":closeModal();break;
   }

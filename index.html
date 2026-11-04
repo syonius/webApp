@@ -487,6 +487,13 @@ app.addEventListener("click",e=>{
 });
 // zákaz pinch-zoomu a double-tap zoomu na iOS
 ["gesturestart","gesturechange"].forEach(t=>document.addEventListener(t,e=>e.preventDefault()));
+// iPhone (aplikácia na ploche): okno hlási nižšiu výšku než obrazovka, preto výšku nastavíme podľa obrazovky
+function fit(){
+  const st=navigator.standalone===true||matchMedia("(display-mode: standalone)").matches;
+  if(st&&innerWidth<600&&innerHeight>innerWidth)app.style.height=Math.max(innerHeight,screen.height)+"px";
+  else app.style.height="";
+}
+fit();addEventListener("resize",fit);addEventListener("orientationchange",fit);
 render();
 </script>
 </body>

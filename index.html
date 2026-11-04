@@ -363,7 +363,7 @@ V.home=()=>{
   <div class="boxes">
    <div class="box"><div class="mi">${ic("coins",22)}</div>Vlastné prostriedky<b>${state.hidden?"•••• EUR":"1"+NB+"396,12"+NB+"EUR"}</b></div>
    <div class="box"><div class="mi">${ic("coins",22)}</div>Povolené prečerpanie:<b>${state.hidden?"•••• EUR":"0,00"+NB+"EUR"}</b></div></div>
-  <div class="row sp"><div class="iban">SK00 0000 0000 0000 0000 0000</div><button class="circ" data-act="copy">${ic("share",24,1.5)}</button></div></div>
+  <div class="row sp"><div class="iban">SK50 0200 0000 0005 5410 1168</div><button class="circ" data-act="copy">${ic("share",24,1.5)}</button></div></div>
  <div class="sheet">
   <div class="promo"><div><h3>Slováci si odkladajú mesačne v priemere 120 €. Pridáte sa aj Vy?</h3><p>Navýšte si sporenie a priblížte sa k svojim snom rýchlejšie. Zaberie to len pár klikov!</p><button class="btn" data-act="demo">Chcem sporiť viac</button></div>
    <svg width="130" height="150" viewBox="0 0 130 150" style="flex:none;align-self:center"><ellipse cx="62" cy="70" rx="62" ry="64" fill="#dff1e7"/><path d="M20 62a42 42 0 0184 0z" fill="#3c8a5b"/><path d="M62 20v95" stroke="#222" stroke-width="2"/><circle cx="52" cy="92" r="9" fill="#d96b32"/><rect x="38" y="100" width="26" height="42" rx="6" fill="#fff" stroke="#222" stroke-width="2"/><circle cx="108" cy="58" r="11" fill="#2f7a50"/><circle cx="110" cy="86" r="9" fill="#d96b32"/></svg></div>
@@ -471,7 +471,7 @@ app.addEventListener("click",e=>{
     case"close":back();break;
     case"home":goHome();break;
     case"eye":state.hidden=!state.hidden;render();break;
-    case"copy":navigator.clipboard?.writeText("SK00 0000 0000 0000 0000 0000").catch(()=>{});toast("IBAN skopírovaný");break;
+    case"copy":navigator.clipboard?.writeText("SK50 0200 0000 0005 5410 1168").catch(()=>{});toast("IBAN skopírovaný");break;
     case"acc":{const t=a.dataset.t;state.menuOpen[t]=!state.menuOpen[t];
       a.closest(".mitem").classList.toggle("open",state.menuOpen[t]);
       a.lastElementChild.outerHTML=ic(state.menuOpen[t]?"up":"down",24,1.6);break}

@@ -358,7 +358,7 @@ V.home=()=>{
   const mnth=["jan","feb","mar","apr","máj","jún","júl","aug","sep","okt","nov","dec"];
   return `<div class="deco"></div><div class="deco2"></div>
  <div class="topbar"><div class="row sp"><button class="ibtn" data-go="menu" style="margin-left:-10px">${ic("menu",34,1.4)}</button>
-   <div class="row"><button class="ibtn" data-act="demo">${ic("bell",34,1.4)}<span class="badge">1</span></button><button class="ibtn" data-act="demo">${ic("user",34,1.4)}</button></div></div></div>
+   <div class="row"><button class="ibtn" data-act="diag">${ic("bell",34,1.4)}<span class="badge">1</span></button><button class="ibtn" data-act="demo">${ic("user",34,1.4)}</button></div></div></div>
  <div class="scroll"><div class="hero">
   <div class="row sp" style="margin-top:14px"><button class="pill" data-act="demo">VÚB účet Extra ${ic("down",18,2)}</button><button class="circ" data-act="demo" style="width:46px">${ic("dots",24)}</button></div>
   <div class="row" style="margin-top:34px;gap:18px"><div class="bal">${bal}</div><button class="circ" data-act="eye" style="width:56px;height:56px">${ic(state.hidden?"eyeoff":"eye",30,1.5)}</button></div>
@@ -470,6 +470,17 @@ app.addEventListener("click",e=>{
     go(g,{t:a.dataset.t,src:a.dataset.src});return}
   switch(a.dataset.act){
     case"demo":demo();break;
+    case"diag":{const pr=document.createElement("div");
+      pr.style.cssText="position:fixed;left:0;top:0;visibility:hidden;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)";
+      const hs=["100vh","100dvh","100lvh","100svh","-webkit-fill-available"].map(v=>{const d=document.createElement("div");d.style.cssText="position:fixed;left:0;top:0;width:1px;visibility:hidden;height:"+v;document.body.appendChild(d);const r=d.getBoundingClientRect().height;d.remove();return v+": "+Math.round(r)});
+      document.body.appendChild(pr);const cs=getComputedStyle(pr);const sa=[cs.paddingTop,cs.paddingRight,cs.paddingBottom,cs.paddingLeft].join(" / ");pr.remove();
+      const vv=window.visualViewport,ar=app.getBoundingClientRect();
+      const L=["standalone: "+navigator.standalone,"display-mode: "+(matchMedia("(display-mode: standalone)").matches?"standalone":"browser"),
+       "inner: "+innerWidth+" x "+innerHeight,"screen: "+screen.width+" x "+screen.height,"avail: "+screen.availWidth+" x "+screen.availHeight,
+       "visualViewport: "+(vv?Math.round(vv.width)+" x "+Math.round(vv.height)+" top "+vv.offsetTop:"-"),
+       "html clientH: "+document.documentElement.clientHeight,"#app: top "+Math.round(ar.top)+" h "+Math.round(ar.height),
+       "safe t/r/b/l: "+sa,"dpr: "+devicePixelRatio,...hs];
+      modal(`<h3>Diagnostika</h3><pre style="font-size:13px;line-height:1.5;white-space:pre-wrap;margin:0">${L.join("\n")}</pre><button class="btn2" data-act="mclose">Zavrieť</button>`);break}
     case"back":back();break;
     case"close":back();break;
     case"home":goHome();break;

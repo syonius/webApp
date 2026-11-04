@@ -96,21 +96,7 @@ svg{display:block;flex:none}
 .cname{font-size:25px;font-weight:700;margin-top:6px;display:flex;align-items:center;gap:10px}
 .car{margin-top:-4px;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10.8cqw;padding:0 15cqw;scrollbar-width:none;position:relative;z-index:2}
 .car::-webkit-scrollbar{display:none}
-.card{flex:0 0 70cqw;aspect-ratio:1.744;border-radius:6cqw;scroll-snap-align:center;position:relative;color:#4a3d12;box-shadow:0 .8cqw 3cqw #0003;overflow:hidden;container-type:inline-size}
-.card>*{position:absolute}
-.card .tex{inset:0;width:100%;height:100%;opacity:.55;mix-blend-mode:overlay}
-.card .lg{left:3cqw;top:3.4cqw;display:flex;gap:1.7cqw;align-items:flex-start}
-.card .lg svg{width:6.4cqw;height:6.4cqw;flex:none;margin-top:.4cqw}
-.card .lg b{display:block;font:500 5.9cqw/1 Georgia,"Times New Roman",serif;letter-spacing:.25cqw}
-.card .lg i{display:block;font:italic 3.2cqw/1.1 Georgia,"Times New Roman",serif;margin-top:.5cqw}
-.card .ico{right:2.4cqw;top:3.2cqw;width:11.3cqw;height:11.3cqw;border-radius:50%;background:#fff;display:grid;place-items:center;color:var(--green)}
-.card .ico svg{width:5.6cqw;height:5.6cqw}
-.card .ty{right:6.6cqw;bottom:16cqw;font:500 3.9cqw/1 system-ui,-apple-system,"Helvetica Neue",sans-serif}
-.card .mc{right:1.8cqw;bottom:2.2cqw;width:21cqw;height:13.8cqw}
-.g-gold{background:radial-gradient(ellipse at 35% 45%,#f1d682,#e6bf56 58%,#d6ab40)}
-.g-green{background:linear-gradient(135deg,#2f6a52,#173a2d);color:#e9f6ef}
-.g-silver{background:linear-gradient(135deg,#e8eaec,#b9bfc4);color:#333}
-.g-night{background:linear-gradient(135deg,#3b4d8a,#1d2748);color:#e8edff}
+.card{flex:0 0 70cqw;aspect-ratio:1.744;border-radius:6cqw;scroll-snap-align:center;position:relative;box-shadow:0 .8cqw 3cqw #0003;overflow:hidden;background:#ddd center/cover no-repeat}
 .dots{display:flex;justify-content:center;gap:7px;margin:14px 0 26px}
 .dots i{width:8px;height:8px;border-radius:5px;background:#555;opacity:.8;transition:.2s}
 .dots i.on{width:26px;background:var(--green-d);opacity:1}
@@ -150,6 +136,40 @@ svg{display:block;flex:none}
 .trow.has .rt{padding-top:3px}
 .more{display:block;width:100%;text-align:left;padding:26px 16px calc(60px + var(--sab));font-size:19px;font-weight:500;color:var(--green-t);text-transform:uppercase}
 .empty{padding:60px 30px;text-align:center;color:#777;font-size:17px}
+
+/* ---------- FILTER + DETAIL ---------- */
+.ov.fov{align-items:flex-end;background:#0007}
+.fsheet{position:relative;background:#fff;width:100%;height:calc(100% - var(--sat) - 40px);border-radius:34px 34px 0 0;padding:20px 0 0;display:flex;flex-direction:column;animation:inb .25s ease-out}
+.fsheet h3{margin:20px 22px 22px;font-size:19px;font-weight:700;color:#333}
+.fx{position:absolute;right:20px;top:20px;color:#333}
+.frow{border-bottom:1.5px solid var(--line)}
+.fhead{display:flex;align-items:center;gap:18px;width:100%;text-align:left;padding:20px 22px;color:#333}
+.fhead span{flex:1}.fhead b{display:block;font-size:19px;font-weight:700}.fhead em{display:block;font-style:normal;font-size:16px;color:#666;margin-top:6px;min-height:20px}
+.fhead .chev{transition:.2s}.frow.open .chev{transform:rotate(180deg)}
+.fbody{display:none;padding:0 22px 22px 70px;gap:14px;flex-direction:column}
+.frow.open .fbody{display:flex}
+.fbody label{display:flex;flex-direction:column;gap:6px;font-size:14px;color:#666}
+.fbody input{border:1.5px solid #bbb;border-radius:14px;height:46px;padding:0 14px;font:inherit;font-size:17px;color:#222;background:#fff;min-width:0;width:100%}
+.ffoot{margin-top:auto;display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:20px 22px calc(26px + var(--sab))}
+.fb{height:52px;border-radius:30px;font-size:17px;font-weight:600}
+.fb.out{border:2px solid var(--green-d);color:var(--green-d)}
+.fb.use{background:var(--green-d);color:#fff}.fb.use:disabled{background:#e6e6e6;color:#888}
+.trow.clk{cursor:pointer}.trow.clk:active{background:#f4f4f4}
+.screen:has(.dbody){background:#f7f7f7}
+.dh{background:#f7f7f7}
+.dbody{padding:12px 22px calc(40px + var(--sab));display:flex;flex-direction:column;gap:22px}
+.dcard{background:#fff;border-radius:26px;box-shadow:0 2px 16px #0000000f}
+.dtop{padding:30px 16px 26px;display:flex;flex-direction:column;align-items:center}
+.dchip{background:#f2f2f2;border-radius:8px;padding:9px 16px;font-size:15px;color:#555;margin:14px 0 30px}
+.damt{font-size:34px;font-weight:700;color:#222}.damt small{font-size:18px;font-weight:500}
+.dtyp{font-size:17px;color:#666;margin:14px 0 30px}
+.dacts{display:grid;grid-template-columns:repeat(3,1fr);width:100%;text-align:center;font-size:15px;gap:6px}
+.mi.big{width:54px;height:54px;border-radius:50%;margin:0 auto 12px}
+.dinfo{padding:6px 26px 14px}
+.dhead{display:flex;align-items:center;gap:18px;width:100%;padding:24px 0 16px;text-align:left}
+.dhead b{flex:1;font-size:23px;font-weight:700}.dhead i{color:#333;transition:.2s}.dinfo:not(.open) .dhead i{transform:rotate(180deg)}
+.dlist{display:none}.dinfo.open .dlist{display:block}
+.drow{padding:14px 0 26px}.dl{font-size:15px;color:#666}.dv{font-size:17px;color:#222;margin-top:6px;word-break:break-word}
 
 /* ---------- OSTATNE ---------- */
 .stub{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 36px;color:#555;font-size:17px;line-height:1.5;min-height:70%}
@@ -200,6 +220,10 @@ filter:'<path d="M5 3v18M12 3v18M19 3v18"/><path d="M3 8h4M10 15h4M17 7h4"/>',
 info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v6"/><circle cx="12" cy="7.6" r=".7" fill="currentColor"/>',
 clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
 coins:'<circle cx="10" cy="12" r="6"/><circle cx="14.5" cy="12" r="6"/>',
+nodes:'<circle cx="12" cy="5" r="2"/><circle cx="6" cy="14" r="2"/><circle cx="18" cy="14" r="2"/><path d="M12 7v4M6 16v5M18 16v5M12 11c0 2-6 1-6 3M12 11c0 2 6 1 6 3"/>',
+folder:'<path d="M3 6a2 2 0 012-2h4l2 2h8a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>',
+cal:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M8 15h.01M12 15h.01M16 15h.01"/>',
+dollarr:'<path d="M20 12a8 8 0 10-3 6.2"/><text x="12" y="15.5" text-anchor="middle" font-size="10" fill="currentColor" stroke="none" font-family="sans-serif">$</text><path d="M17 15l3 3-3 3"/>',
 pinfield:'<rect x="2" y="7" width="20" height="10" rx="2"/><path d="M6 12h.01M10 12h.01M14 12h.01M18 12h.01" stroke-width="2.4"/>'
 };
 const ic=(n,s=24,w=1.6)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round">${I[n]}</svg>`;
@@ -219,7 +243,7 @@ const esc=s=>s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
 /* ================= dáta: transakcie karty ================= */
 const PK="Platba kartou", POP="Poplatky";
 const T=(date,type,desc,amt,pending)=>({date,type,desc,amt,pending:!!pending});
-const N2G=(code,date,amt)=>Object.assign(T(date,"Platba kartou","*8632 N2G EXPORT NIORT",-amt),{code});   // ručne zadané, kód = interné označenie
+const N2G=(code,date,amt)=>Object.assign(T(date,"Platba kartou","*8632 N2G EXPORT NIORT",-amt),{code,detail:true});   // ručne zadané, kód = interné označenie
 const cardTx=[
  // čakajúce (zo screenshotov)
  T(D(2026,11,2),PK,"*8632 GOPAY  *OBCHOD.CREW.CZ PRAHA 3",-74.04,1),
@@ -233,7 +257,7 @@ const cardTx=[
  T(D(2026,11,2),POP,"Odmena za platby - vrátenie poplatku",10),
  T(D(2026,11,1),PK,"*8632 comicscentrum Praha - Stra",-64),
  T(D(2026,10,30),POP,"*8632 Popl. za dobíjanie digitálnych účtov cez platby kartou",-1),
- T(D(2026,10,30),PK,"*8632 PAYPAL *ETORO EU 35314369001",-100),
+ Object.assign(T(D(2026,10,30),PK,"*8632 PAYPAL *ETORO EU 35314369001",-100),{detail:true}),
  T(D(2026,10,30),PK,"*8632 PAYPAL *DEAGOSTINI DEA 4029357733",-47.96),
  T(D(2026,10,29),PK,"*8632 N2G EXPORT NIORT",-35.78),
  T(D(2026,10,28),PK,"*8632 PAYPAL *YOYAKUNOW 4029357733",-21.95),
@@ -340,15 +364,14 @@ accTx.sort((a,b)=>b.date-a.date);
 
 /* ================= karty ================= */
 const CARDS=[
- {kind:"credit",label:"Kreditná karta - hlavná s plastom",name:"*8632 Mastercard World",star:1,cls:"g-gold",type:"credit"},
- {kind:"debit",label:"Debetná karta - s plastom",name:"*4417 Visa Classic",cls:"g-green",type:"debit"},
- {kind:"debit",label:"Virtuálna karta",name:"*9025 Mastercard Virtual",cls:"g-night",type:"virtual"},
- {kind:"credit",label:"Kreditná karta - dodatočná",name:"*8640 Mastercard World",cls:"g-silver",type:"credit"},
+ {kind:"credit",label:"Kreditná karta - hlavná s plastom",name:"*8632 Mastercard World",star:1,img:"img/card-credit.jpg",type:"credit"},
+ {kind:"debit",label:"Debetná karta - s plastom",name:"*4417 Visa Gold Debit",img:"img/card-gold.jpg",type:"debit"},
+ {kind:"debit",label:"Debetná karta - s plastom",name:"*9025 Visa Debit",img:"img/card-white.jpg",type:"debit"},
 ];
 
 /* ================= stav a router ================= */
 const app=document.getElementById("app");
-const state={hidden:false,stack:[{s:"home"}],cardIdx:0,menuOpen:{Karty:false},shown:{}};
+const state={filters:{},hidden:false,stack:[{s:"home"}],cardIdx:0,menuOpen:{Karty:false},shown:{}};
 const cur=()=>state.stack[state.stack.length-1];
 let toastT;
 function toast(t){const e=document.getElementById("toast");e.textContent=t;e.classList.add("show");clearTimeout(toastT);toastT=setTimeout(()=>e.classList.remove("show"),1800)}
@@ -419,15 +442,7 @@ V.menu=()=>{
   <button class="out" data-act="logout">${"<u>Odhlásiť sa</u>"}${ic("power",30,1.5)}</button></div>`;
 };
 
-const cardHTML=(c,i)=>{
-  const id="mc"+i;
-  return `<div class="card ${c.cls}">
-  <svg class="tex" aria-hidden="true"><filter id="n${i}" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="${i+3}"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#n${i})"/></svg>
-  <div class="lg"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="36" height="36"/><path d="M8 22v-6a4 4 0 018 0v6M16 22v-6a4 4 0 018 0v6M24 22v-6a4 4 0 018 0v6M6 22h28"/></svg><div><b>VÚB BANKA</b><i>Intesa Sanpaolo Group</i></div></div>
-  <div class="ico">${ic("card",22,1.6)}</div>
-  <div class="ty">${c.type}</div>
-  <svg class="mc" viewBox="0 0 76 50"><defs><clipPath id="${id}"><circle cx="25" cy="25" r="25"/></clipPath></defs><circle cx="25" cy="25" r="25" fill="#e12a2d"/><circle cx="51" cy="25" r="25" fill="#f39a29"/><circle cx="51" cy="25" r="25" fill="#ec6a2b" clip-path="url(#${id})"/></svg></div>`;
-};
+const cardHTML=(c,i)=>`<div class="card" style="background-image:url(${c.img})"></div>`;
 V.cards=()=>`<div class="chead">
   <div class="row sp"><button class="ibtn" data-go="menu" style="margin-left:-10px">${ic("menu",34,1.4)}</button>
    <div class="row"><button class="ibtn" data-act="demo">${ic("info",34,1.3)}</button><button class="ibtn" data-act="home">${ic("close",34,1.3)}</button></div></div>
@@ -470,8 +485,10 @@ const PAGE=10;
 V.tx=p=>`<div class="thead${""}"><div style="height:0"></div>
   <div class="ttl"><button class="ibtn" data-act="back" style="margin-left:-6px">${ic("back",34,1.3)}</button><h1>Zoznam transakcií</h1></div>
   <div class="srch"><label>${ic("search",30,1.6)}<input id="q" type="search" placeholder="Hľadať" autocomplete="off" enterkeyhint="search"></label>
-  <button data-act="demo">${ic("exp",38,1.4)}</button><button data-act="demo">${ic("filter",38,1.4)}</button></div></div>
+  <button data-act="demo">${ic("exp",38,1.4)}</button><button data-act="filter">${ic("filter",38,1.4)}</button></div></div>
   <div id="list"></div>`;
+const fdate=v=>{const [y,m,d]=v.split("-");return d+"."+m+"."+y};
+const fnum=v=>{const n=parseFloat(String(v).replace(/\s/g,"").replace(",","."));return isNaN(n)?null:n};
 function initTx(el,p){
   const data=p.src==="acc"?accTx:cardTx, key=p.src;
   let shown=state.shown[key]||PAGE, q="";
@@ -480,18 +497,90 @@ function initTx(el,p){
   el.insertAdjacentHTML("afterbegin",`<div class="sat"></div>`);
   el.querySelector(".thead").style.top="var(--sat)";
   const draw=()=>{
-    const f=q?data.filter(t=>(t.type+" "+t.desc+" "+dstr(t.date)+" "+fmt(t.amt)+" "+(t.code||"")).toLowerCase().includes(q)):data;
+    const F=state.filters[key]||{};
+    const from=F.from?new Date(F.from+"T00:00:00"):null, to=F.to?new Date(F.to+"T00:00:00"):null;
+    const mn=fnum(F.min||""), mx=fnum(F.max||"");
+    let f=data;
+    if(from||to||mn!==null||mx!==null)f=f.filter(t=>{const a=Math.abs(t.amt);
+      return (!from||t.date>=from)&&(!to||t.date<=to)&&(mn===null||a>=mn)&&(mx===null||a<=mx)});
+    if(q)f=f.filter(t=>(t.type+" "+t.desc+" "+dstr(t.date)+" "+fmt(t.amt)+" "+(t.code||"")).toLowerCase().includes(q));
     if(!f.length){list.innerHTML=`<div class="empty">Nenašli sa žiadne transakcie</div>`;return}
-    list.innerHTML=f.slice(0,shown).map(t=>`<div class="trow">
+    list.innerHTML=f.slice(0,shown).map(t=>{const click=t.code||t.detail;
+     return `<div class="trow${click?" clk":""}"${click?` data-act="detail" data-src="${key}" data-i="${data.indexOf(t)}"`:""}>
      <div class="l">${t.pending?`<div class="pend">${ic("clock",24,1.6)}Čakajúca</div>`:""}
       <div class="k">${t.type}</div><div class="dsc">${esc(t.desc)}</div></div>
-     <div class="rt"><div class="dt">${dstr(t.date)}</div><div class="am ${t.amt>0?"pos":""}">${fmt(t.amt,1)}</div></div></div>`).join("")
+     <div class="rt"><div class="dt">${dstr(t.date)}</div><div class="am ${t.amt>0?"pos":""}">${fmt(t.amt,1)}</div></div></div>`}).join("")
      +(f.length>shown?`<button class="more" data-act="more-tx">Načítať viac</button>`:`<div style="height:calc(50px + var(--sab))"></div>`);
   };
   list._draw=draw;list._more=()=>{shown+=PAGE;state.shown[key]=shown;draw()};
+  list._filter=()=>openFilter(key,()=>{shown=state.shown[key]||PAGE;draw();el.scrollTop=0});
   inp.addEventListener("input",()=>{q=inp.value.trim().toLowerCase();shown=q?9999:(state.shown[key]||PAGE);draw()});
   draw();
 }
+
+/* ---- filter ---- */
+function openFilter(key,done){
+  const saved=state.filters[key]||{};
+  const cur={from:saved.from||"",to:saved.to||"",min:saved.min||"",max:saved.max||""};
+  const o=document.createElement("div");o.className="ov fov";
+  const val=()=>({
+    kedy:(cur.from||cur.to)?((cur.from?fdate(cur.from):"…")+" – "+(cur.to?fdate(cur.to):"…")):"Všetko",
+    suma:(cur.min||cur.max)?((cur.min?"od "+cur.min:"")+(cur.min&&cur.max?" ":"")+(cur.max?"do "+cur.max:"")+" EUR"):"–"});
+  const row=(id,icn,title,hasBody)=>`<div class="frow" data-r="${id}"><button class="fhead" ${hasBody?`data-t="${id}"`:""}>${ic(icn,30,1.4)}<span><b>${title}</b><em data-v="${id}"></em></span><i class="chev">${ic("down",28,1.5)}</i></button>
+    ${id==="kedy"?`<div class="fbody"><label>Od<input type="date" data-f="from" value="${cur.from}"></label><label>Do<input type="date" data-f="to" value="${cur.to}"></label></div>`:""}
+    ${id==="suma"?`<div class="fbody"><label>Od (EUR)<input type="text" inputmode="decimal" placeholder="0,00" data-f="min" value="${cur.min}"></label><label>Do (EUR)<input type="text" inputmode="decimal" placeholder="0,00" data-f="max" value="${cur.max}"></label></div>`:""}</div>`;
+  o.innerHTML=`<div class="fsheet"><button class="fx" data-fclose>${ic("close",40,1.2)}</button><h3>Filtre</h3>
+    ${row("zobr","dollarr","Zobraziť transakcie",false)}${row("kedy","cal","Kedy",true)}${row("suma","coins","Suma",true)}${row("typ","transfer","Typ",false)}
+    <div class="ffoot"><button class="fb out" data-freset>Resetovať</button><button class="fb use" data-fuse disabled>Použiť</button></div></div>`;
+  const refresh=()=>{
+    const v=val();o.querySelector('[data-v=kedy]').textContent=v.kedy;o.querySelector('[data-v=suma]').textContent=v.suma;
+    o.querySelector('[data-v=zobr]').textContent="–";o.querySelector('[data-v=typ]').textContent="–";
+    const changed=["from","to","min","max"].some(k=>cur[k]!==(saved[k]||""));
+    o.querySelector("[data-fuse]").disabled=!changed;
+  };
+  o.addEventListener("click",e=>{
+    if(e.target===o||e.target.closest("[data-fclose]")){o.remove();return}
+    const h=e.target.closest(".fhead[data-t]");if(h)h.parentElement.classList.toggle("open");
+    if(e.target.closest("[data-freset]")){["from","to","min","max"].forEach(k=>cur[k]="");o.querySelectorAll("[data-f]").forEach(i=>i.value="");refresh();state.filters[key]={};o.querySelector("[data-fuse]").disabled=false}
+    if(e.target.closest("[data-fuse]")&&!e.target.closest("[data-fuse]").disabled){state.filters[key]={...cur};o.remove();done()}
+  });
+  o.addEventListener("input",e=>{const k=e.target.dataset.f;if(k){cur[k]=e.target.value.trim();refresh()}});
+  app.appendChild(o);refresh();
+}
+
+/* ---- detail transakcie ---- */
+const addBd=(d,n)=>{const x=new Date(d);while(n>0){x.setDate(x.getDate()+1);const w=x.getDay();if(w!==0&&w!==6)n--}return x};
+V.detail=p=>{
+  const t=(p.src==="acc"?accTx:cardTx)[p.i];
+  const eur=fmt(Math.abs(t.amt)).replace(NB+"EUR","");
+  const book=addBd(t.date,2);
+  const row=(l,v)=>`<div class="drow"><div class="dl">${l}</div><div class="dv">${v}</div></div>`;
+  return `<div class="sat"></div><div class="thead dh" style="top:var(--sat)"><div class="ttl" style="margin-bottom:0"><button class="ibtn" data-act="back" style="margin-left:-6px">${ic("back",34,1.3)}</button><h1>Detail transakcie</h1></div></div>
+  <div class="dbody">
+   <div class="dcard dtop">
+    <svg width="140" height="130" viewBox="0 0 140 130"><path d="M22 70c-6-26 18-52 52-56 36-4 58 20 52 50-6 32-40 50-68 40-20-7-32-16-36-34z" fill="#dff3e8"/><g fill="none" stroke="#222" stroke-width="2"><ellipse cx="52" cy="46" rx="26" ry="8"/><path d="M26 46v36c0 5 12 9 26 9M26 62c0 5 12 9 26 9M78 46v10"/></g><circle cx="86" cy="66" r="24" fill="#3c8a5b" stroke="#fff" stroke-width="4"/><circle cx="86" cy="66" r="28" fill="none" stroke="#222" stroke-width="2"/><text x="86" y="75" text-anchor="middle" font-size="26" fill="#222" font-family="sans-serif">$</text></svg>
+    <div class="dchip">${dstr(book)}</div>
+    <div class="damt">${eur} <small>EUR</small></div>
+    <div class="dtyp">${t.type}</div>
+    <div class="dacts"><div><div class="mi big">${ic("doc",28,1.5)}</div>Potvrdenie</div><div><div class="mi big">${ic("share",28,1.5)}</div>Zdieľať</div><div><div class="mi big">${ic("nodes",28,1.5)}</div>Zdieľať platbu</div></div>
+   </div>
+   <div class="dcard dinfo open" id="dinfo"><button class="dhead" data-act="dtoggle">${ic("folder",34,1.4)}<b>Základné údaje</b><i>${ic("up",30,1.5)}</i></button>
+    <div class="dlist">
+     ${row("Dátum a čas autorizácie",dstr(t.date)+" 00:00:00")}
+     ${row("Dátum zaúčtovania",dstr(book))}
+     ${row("Popis transakcie",esc(t.desc))}
+     ${row("Číslo karty","*8632")}
+     ${row("Suma v mene karty/účtu",eur)}
+     ${row("Mena","EUR")}
+     ${row("Suma v pôvodnej mene",eur)}
+     ${row("Pôvodná mena","EUR")}
+     ${row("Typ transakcie",t.type)}
+     ${row("Stav transakcie",t.pending?"Čakajúca":"Zrealizované")}
+     ${row("Výsledok autorizácie","Schválená")}
+     ${row("Suma a mena Cashback","–")}
+    </div></div>
+  </div>`;
+};
 
 V.stub=p=>`<div class="sat"></div><div class="thead g" style="top:var(--sat)"><div class="ttl" style="margin-bottom:0"><button class="ibtn" data-act="back" style="margin-left:-6px">${ic("back",34,1.3)}</button><h1>${p.t||""}</h1></div></div>
  <div class="stub"><div style="color:var(--green);margin-bottom:16px">${ic("info",56,1.2)}</div>Táto obrazovka nie je súčasťou dema.<br>Skúste Domov, Karty alebo Transakcie.</div>`;
@@ -516,6 +605,9 @@ app.addEventListener("click",e=>{
       a.lastElementChild.outerHTML=ic(state.menuOpen[t]?"up":"down",24,1.6);break}
     case"logout":break;
     case"more-tx":a.closest("#list")._more();break;
+    case"filter":app.querySelector("#list")._filter();break;
+    case"detail":go("detail",{src:a.dataset.src,i:+a.dataset.i});break;
+    case"dtoggle":a.closest(".dcard").classList.toggle("open");break;
     case"pin":modal(`<h3>PIN karty ${CARDS[state.cardIdx].name.slice(0,5)}</h3><div class="pin"><b>4</b><b>8</b><b>2</b><b>1</b></div><div style="color:#666;font-size:14px;text-align:center">Demo PIN. Zobrazuje sa len ukážkovo.</div><button class="btn2" data-act="mclose">Zavrieť</button>`);break;
     case"more":modal(`<h3>Ďalšie akcie</h3><button class="opt" data-act="demo">Zmeniť limity</button><button class="opt" data-act="demo">Zablokovať kartu</button><button class="opt" data-act="demo">Nastavenia platieb</button><button class="btn2" data-act="mclose">Zavrieť</button>`);break;
     case"mclose":closeModal();break;

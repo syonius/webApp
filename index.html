@@ -146,12 +146,13 @@ svg{display:block;flex:none}
 .fhead{display:flex;align-items:center;gap:18px;width:100%;text-align:left;padding:20px 22px;color:#333}
 .fhead span{flex:1}.fhead b{display:block;font-size:19px;font-weight:700}.fhead em{display:block;font-style:normal;font-size:16px;color:#666;margin-top:6px;min-height:20px}
 .fhead .chev{transition:.2s}.frow.open .chev{transform:rotate(180deg)}
-.fbody{display:none;padding:0 22px 22px 70px;gap:14px;flex-direction:column}
-.frow.open .fbody{display:flex}
-.fbody label{display:flex;flex-direction:column;gap:6px;font-size:14px;color:#666}
-.fbody input{border:1.5px solid #bbb;border-radius:14px;height:46px;padding:0 14px;font:inherit;font-size:17px;color:#222;background:#fff;min-width:0;width:100%}
-.ffoot{margin-top:auto;display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:20px 22px calc(26px + var(--sab))}
-.fb{height:52px;border-radius:30px;font-size:17px;font-weight:600}
+.fscroll{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.fbody{display:none;padding:0 22px 22px 70px;gap:12px;grid-template-columns:1fr 1fr}
+.frow.open .fbody{display:grid}
+.fbody label{display:flex;flex-direction:column;gap:6px;font-size:14px;color:#666;min-width:0}
+.fbody input{-webkit-appearance:none;appearance:none;display:block;box-sizing:border-box;border:1.5px solid #bbb;border-radius:14px;height:46px;padding:0 10px;font:inherit;font-size:16px;color:#222;background:#fff;min-width:0;max-width:100%;width:100%;text-align:left}
+.ffoot{flex:none;display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:20px 22px calc(26px + var(--sab))}
+.fb{display:flex;align-items:center;justify-content:center;text-align:center;width:100%;height:52px;border-radius:30px;font-size:17px;font-weight:600}
 .fb.out{border:2px solid var(--green-d);color:var(--green-d)}
 .fb.use{background:var(--green-d);color:#fff}.fb.use:disabled{background:#e6e6e6;color:#888}
 .trow.clk{cursor:pointer}.trow.clk:active{background:#f4f4f4}
@@ -529,8 +530,8 @@ function openFilter(key,done){
   const row=(id,icn,title,hasBody)=>`<div class="frow" data-r="${id}"><button class="fhead" ${hasBody?`data-t="${id}"`:""}>${ic(icn,30,1.4)}<span><b>${title}</b><em data-v="${id}"></em></span><i class="chev">${ic("down",28,1.5)}</i></button>
     ${id==="kedy"?`<div class="fbody"><label>Od<input type="date" data-f="from" value="${cur.from}"></label><label>Do<input type="date" data-f="to" value="${cur.to}"></label></div>`:""}
     ${id==="suma"?`<div class="fbody"><label>Od (EUR)<input type="text" inputmode="decimal" placeholder="0,00" data-f="min" value="${cur.min}"></label><label>Do (EUR)<input type="text" inputmode="decimal" placeholder="0,00" data-f="max" value="${cur.max}"></label></div>`:""}</div>`;
-  o.innerHTML=`<div class="fsheet"><button class="fx" data-fclose>${ic("close",40,1.2)}</button><h3>Filtre</h3>
-    ${row("zobr","dollarr","Zobraziť transakcie",false)}${row("kedy","cal","Kedy",true)}${row("suma","coins","Suma",true)}${row("typ","transfer","Typ",false)}
+  o.innerHTML=`<div class="fsheet"><button class="fx" data-fclose>${ic("close",40,1.2)}</button><h3>Filtre</h3><div class="fscroll">
+    ${row("zobr","dollarr","Zobraziť transakcie",false)}${row("kedy","cal","Kedy",true)}${row("suma","coins","Suma",true)}${row("typ","transfer","Typ",false)}</div>
     <div class="ffoot"><button class="fb out" data-freset>Resetovať</button><button class="fb use" data-fuse disabled>Použiť</button></div></div>`;
   const refresh=()=>{
     const v=val();o.querySelector('[data-v=kedy]').textContent=v.kedy;o.querySelector('[data-v=suma]').textContent=v.suma;

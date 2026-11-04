@@ -304,9 +304,9 @@ const accTx=(function(){
 const homeTx=[
  T(D(2026,10,30),"Poplatky a iné","Vedenie konta VÚB účet Extra",-11),
  T(D(2026,10,30),"Odchádzajúca platba","Investicne sporenie - STO",-20),
- T(D(2026,10,30),"Vklad cez bankomat","Vklad hotovosti; S6AV162X Nitra 18:05",100),
+ T(D(2026,10,28),"Odchádzajúca platba","Sporenie",-50),
 ];
-accTx.push(...homeTx,T(D(2026,10,28),"Odchádzajúca platba","Sporenie",-50));
+accTx.push(...homeTx);
 accTx.sort((a,b)=>b.date-a.date);
 
 /* ================= karty ================= */

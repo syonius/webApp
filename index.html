@@ -20,12 +20,13 @@
   --sat:env(safe-area-inset-top,0px); --sab:env(safe-area-inset-bottom,0px);
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html{background:var(--green) linear-gradient(#fff,#fff)}
+html{background:#fff}
 html,body{margin:0;height:100%;color:var(--ink);
   font-family:"Poppins","Avenir Next","Helvetica Neue",system-ui,-apple-system,sans-serif;
   -webkit-text-size-adjust:100%;overscroll-behavior:none}
 button{touch-action:manipulation;font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
 #app{position:fixed;inset:0;overflow:hidden;background:#fff}
+#statusfill{position:fixed;top:0;left:0;right:0;height:var(--sat);background:var(--green);z-index:50;pointer-events:none}
 @media(min-width:600px){
   body{background:#0e1512;display:flex;align-items:center;justify-content:center}
   #app{position:relative;inset:auto;height:min(100dvh - 24px,900px);width:430px;border-radius:44px;box-shadow:0 20px 80px #000a}
@@ -166,6 +167,7 @@ svg{display:block;flex:none}
 </head>
 <body>
 <div id="app"><div class="toast" id="toast"></div></div>
+<div id="statusfill"></div>
 <script>
 "use strict";
 /* ================= ikony ================= */

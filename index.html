@@ -254,7 +254,6 @@ const cardTx=[
  T(D(2026,9,9),PK,"*8632 N2G EXPORT NIORT",-67.67),
  T(D(2026,9,7),PK,"*8632 tenso Hong Kong Limite Admiralty",-77.81),
  T(D(2026,9,6),PK,"*8632 tenso Hong Kong Limite Admiralty",-184.28),
- T(D(2026,9,1),PK,"*8632 Grekotel Corfu Imperia CORFU",-300),
 ];
 (function generuj(){            // náhodné doplnenie späť až do mája 2026
   const r=rng(8632), rr=(a,b)=>a+r()*(b-a), cents=v=>Math.round(v*100)/100;
@@ -274,18 +273,20 @@ const cardTx=[
   const sum=M.reduce((s,m)=>s+m.w,0);
   const pick=()=>{let x=r()*sum;for(const m of M){if((x-=m.w)<0)return m}return M[0]};
   const add=(d,t,desc,a)=>cardTx.push(T(d,t,desc,a));
-  for(let d=D(2026,5,1);d<=D(2026,10,4);d=new Date(d.getFullYear(),d.getMonth(),d.getDate()+1)){
+  const segment=(od,po)=>{
+  for(let d=od;d<=po;d=new Date(d.getFullYear(),d.getMonth(),d.getDate()+1)){
     const mo=d.getMonth()+1,dy=d.getDate();
     if(mo===9&&dy<=11)continue;                        // tieto dni už sú v dátach vyššie
     const x=r(), n=x<.5?0:x<.8?1:x<.93?2:3;
     let m=pick();
     for(let i=0;i<n;i++){ if(i&&r()>.5)m=pick(); add(d,PK,"*8632 "+m.n,-m.f()); }
-    if(dy===2&&mo>=6){add(d,POP,"*8632 Mesačný popl. za vedenie kart. účtu",-10);add(d,POP,"Odmena za platby - vrátenie poplatku",10)}
+    if(dy===2&&mo!==5){add(d,POP,"*8632 Mesačný popl. za vedenie kart. účtu",-10);add(d,POP,"Odmena za platby - vrátenie poplatku",10)}
     if(dy===21&&mo<=9)add(d,"Splátka","*8632 Uhradená splátka",[57,76,100,150][Math.floor(r()*4)]);
     if(dy===30&&mo<=9){add(d,PK,"*8632 PAYPAL *ETORO EU 35314369001",-100);add(d,POP,"*8632 Popl. za dobíjanie digitálnych účtov cez platby kartou",-1)}
-  }
-  add(D(2026,7,20),PK,"*8632 Grekotel Corfu Imperia CORFU",-300);
-  add(D(2026,8,5),PK,"*8632 Grekotel Corfu Imperia CORFU",-150);
+  }};
+  segment(D(2026,5,1),D(2026,10,4));      // máj až október
+  segment(D(2026,1,1),D(2026,4,30));      // január až apríl
+  cardTx.forEach(t=>{if(t.desc.includes("N2G EXPORT"))t.amt=Math.round(t.amt/5*100)/100});   // N2G: suma / 5
   cardTx.sort((a,b)=>(b.pending-a.pending)||(b.date-a.date));   // stabilné zoradenie
 })();
 
@@ -293,9 +294,9 @@ const cardTx=[
 const accTx=(function(){
   const out=[],r=rng(2610),rr=(a,b)=>Math.round((a+r()*(b-a))*100)/100;
   const IN="Prichádzajúca platba",OUT="Odchádzajúca platba",ME="Výplata";
-  for(let m=5;m<=11;m++){
+  for(let m=1;m<=11;m++){
     out.push(T(D(2026,m,3),IN,ME,1300));
-    if(m>=6&&m<=10)out.push(T(D(2026,m,21),OUT,"Splátka kreditnej karty *8632",-[57,76,100,150][Math.floor(r()*4)]));
+    if(m<=10)out.push(T(D(2026,m,21),OUT,"Splátka kreditnej karty *8632",-[57,76,100,150][Math.floor(r()*4)]));
     if(m<=10){out.push(T(D(2026,m,5),OUT,"Trvalý príkaz - sporenie",-200));
       out.push(T(D(2026,m,12),OUT,"Orange Slovensko, a.s.",-29.90));
       out.push(T(D(2026,m,15),OUT,"Slovenský plynárenský priemysel",-rr(40,75)));
